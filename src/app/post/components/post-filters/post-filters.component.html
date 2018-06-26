@@ -1,0 +1,7 @@
+<ng-container *ngIf="filters && filters.length > 0">
+	<div class="d-flex justify-content-start flex-wrap filters">
+		<div class="mr-1 my-1 filters-chip" *ngFor="let filter of filters;let i =index;">
+			<strong>{{filter.data.title}}</strong>:<small class="ml-1">{{filter.data.value}}</small><i class="fa fa-times ml-1" (click)="removeFilter(filter.id)"></i>
+		</div>
+	</div>
+</ng-container>

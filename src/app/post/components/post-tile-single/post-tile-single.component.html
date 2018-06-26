@@ -1,0 +1,110 @@
+<div class="post-tile-single page-block mb-4">
+	<div class="post-tile-single-header">
+		<div class="post-meta row ml-2">
+			<div class="post-id">
+				<span>#{{post.displayedId}}</span>
+			</div>
+			<div class="post-author ml-2">
+				<small class="text-muted">by <span class="font-weight-bold">{{post.revealAuthor == true ? post.author.username : 'Anonymous'}}</span></small>
+			</div>
+
+			<div class="post-category ml-3">
+			{{post.category.title}}
+		</div>
+		</div>
+		
+		<div class="post-date">
+			{{post.postedOn | fromNow}}
+		</div>
+	</div>
+
+	<div class="post-tile-single-body">
+		<p class="post-text">
+			{{post.text | overflow : excerptLength : showMore}}
+			<a class="showmore d-inline" (click)="toggleShowMoreLess()" *ngIf="post.text.length > excerptLength">{{showMore ? 'Show less' : 'Show more'}}</a>
+		</p>
+	</div>
+		<div class="post-tile-single-tags">
+		<div class="isp-post-tag" *ngFor="let tag of post.tags">
+			<span class="tag-text">{{tag.title}}</span>
+		</div>
+	</div>
+
+	<div class="post-tile-single-footer">
+		<span class="post-like">
+			<span [ngClass]="{'isp-action-made-likes':userActions.liked,'isp-noevents':!authorized}">
+			<i class="far fa-thumbs-up"  (click)="likePost()"></i>
+			<span class="post-like-counter ml-1" *ngIf="post.likes && post.likes.length">
+				{{post.likes.length}}
+			</span>
+		</span>
+			<ng-container *ngIf="alertMessage && alertMessage.attr == 'likes' && alertMessage.elementId == post._id">
+				<div class="post-action-alert post-action-alert-{{alertMessage.type}}">
+						<div class="post-action-alert-title">
+							<i class="fa mr-2" [ngClass]="{'fa-exclamation-circle':alertMessage.type == 'error','fa-check-circle':alertMessage.type == 'success'}"></i>
+							{{alertMessage.title}}
+						</div>
+						<div class="post-action-alert-body" *ngIf="alertMessage.body">
+								{{alertMessage.body}}
+						</div>
+					</div>
+			</ng-container>	
+				
+			
+		</span>
+
+		<span class="post-dislike">
+			<span [ngClass]="{'isp-action-made-dislikes':userActions.disliked,'isp-noevents':!authorized}">
+				<i class="far fa-thumbs-down"  (click)="dislikePost()"></i>
+				<span class="post-dislike-counter ml-1" *ngIf="post.dislikes && post.dislikes.length">
+				{{post.dislikes.length}}
+
+			</span>
+			</span>
+			
+			<ng-container *ngIf="alertMessage && alertMessage.attr == 'dislikes' && alertMessage.elementId == post._id">
+			<div class="post-action-alert post-action-alert-{{alertMessage.type}}">
+						<div class="post-action-alert-title">
+							<i class="fa mr-2" [ngClass]="{'fa-exclamation-circle':alertMessage.type == 'error','fa-check-circle':alertMessage.type == 'success'}"></i>{{alertMessage.title}}
+						</div>
+						<div class="post-action-alert-body" *ngIf="alertMessage.body">
+							{{alertMessage.body}}
+						</div>
+					</div>
+			</ng-container>
+			
+			
+		</span>
+
+		<span class="post-comments">
+			<i class="far fa-comments"></i>
+			<span class="post-comments-counter ml-1" *ngIf="post.comments && post.comments.length">
+				{{post.comments.length}}
+			</span>
+		</span>
+
+		<span class="post-add-bookmarks">
+			<span [ngClass]="{'isp-action-made-stars':userActions.starred,'isp-noevents':!authorized}">
+					<i class="far fa-star"  (click)="starPost()"></i>
+					<span class="post-stars-counter ml-1" *ngIf="post.stars && post.stars.length">
+				{{post.stars.length}}
+			</span>
+			</span>
+		
+			
+				<ng-container *ngIf="alertMessage && alertMessage.attr == 'stars' && alertMessage.elementId == post._id">
+					<div class="post-action-alert post-action-alert-{{alertMessage.type}}">
+						<div class="post-action-alert-title">
+							<i class="fa mr-2" [ngClass]="{'fa-exclamation-circle':alertMessage.type == 'error','fa-check-circle':alertMessage.type == 'success'}"></i>
+							{{alertMessage.title}}
+						</div>
+						<div class="post-action-alert-body" *ngIf="alertMessage.body">
+								{{alertMessage.body}}
+						</div>
+					</div>
+			</ng-container>
+			
+		</span>
+
+	</div>
+</div>

@@ -1,0 +1,56 @@
+@import "_colors.scss";
+
+.create-post{
+
+
+	&-header{
+		padding:1.3rem;
+		background:$menu-bg;
+		color:$white;
+
+		&-close{
+		    position: absolute;
+		    right: -35px;
+		    width: 42px;
+		    text-align: center;
+		    background: rgba(darken($danger,10%), 0.6);
+		    color: #fff;
+		    font-size: 21px;
+		    top: 0;
+		    z-index: -1;
+		    border-radius: 5px;
+		    height: 35px;
+		    border-bottom-left-radius: 0;
+		    border-top-left-radius: 0;
+		    transition:.2s all;
+
+		    i{
+		    	display:block;
+		    	position:relative;
+		    	transform:translateX(4px);
+				}
+
+		&:hover{
+			    background: rgba(darken($danger,7%), 0.7);
+
+		}
+    }
+	}
+
+	&-form{
+		padding:1.5rem 3rem;
+
+		label{
+			margin:.5rem 0;
+			font-size:1.2rem;
+		}
+
+		textarea.lg{
+			height:14rem;
+		}
+	}
+
+	&-footer{
+		padding:1.5rem 3rem;
+	}
+}

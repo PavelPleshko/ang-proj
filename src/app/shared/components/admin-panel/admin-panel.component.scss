@@ -1,0 +1,60 @@
+@import "_colors.scss";
+
+.admin-panel{
+	position:relative;
+	background-color:$admin-panel-bg;
+	color:$plain-text;
+	border-bottom:1px solid #4872a3;
+	padding:1rem 0;
+
+
+
+	&-logo{
+		font-size:1.3rem;
+	}
+
+	&-nav{
+		display:flex;
+	}
+
+	&-menu{
+		list-style:none;
+		display:flex;
+
+		a{
+			font-size:1.3rem;
+			margin-right:1rem;
+			padding:.5rem 1rem;
+			border-radius:3px;
+			font-weight:600;
+			color:$menu-bg;
+
+			&:hover{
+				background:darken($admin-panel-bg,10%);
+			}
+		}
+	}
+
+
+
+	&-state{
+		list-style:none;
+		display:flex;
+		flex-flow:row nowrap;
+
+		li{
+			position:relative;
+			margin-right:1.5rem;
+		}
+
+		i{
+			font-size:2rem;
+			color:$menu-icons;
+		}
+
+		
+	}
+
+
+
+}

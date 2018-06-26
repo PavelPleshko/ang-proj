@@ -1,0 +1,123 @@
+<div class="mb-4 page-block" [class.isp-overflow-hidden]="!showSearch">
+	<div class="page-block-header default-bg rounded-top" (click)="toggleShowSearch()">
+					<h4 class="text-center py-3 m-0">Advanced search<div [class.isp-rotate-angle90]="showSearch" [class.isp-rotate]="!showSearch" class="fa fa-angle-right ml-2"></div></h4>
+	</div>
+	<div class="search-form isp-slideout-vertical" [class.show]="showSearch">
+			<form [formGroup]="searchForm" class="pt-3">
+
+				<div class="search-block">
+				<div class="row px-4">
+					<div class="col-sm-12">
+
+						<label for="category">Categories</label>
+						<span class="clear-inputs float-right" (click)="clearControl('category','array')">clear</span>
+						<input id="category" class="form-control category-input" type="text" placeholder="e.g. 'Family'" #categoriesInput="ngbTypeahead" [ngbTypeahead]="searchCategories" (selectItem)="selectCategory($event)"  (focus)="catfocus$.next($event.target.value)"
+  						(click)="catclick$.next($event.target.value)">
+  						<div class="d-flex">
+	  						<ng-container *ngIf="searchForm.get('category').controls.length > 0">
+					       		<div class="isp-height100">
+					       			<div class="p-1 d-flex flex-wrap">
+					       			   	<span class="isp-chip default-bg d-flex align-items-center" *ngFor="let categoryControl of searchForm.get('category').controls;let i=index;"><span>{{categoryControl.value}}</span><i class="fa fa-times ml-1" (click)="removeFromArray('category',i)"></i></span>
+					       			</div>
+					       		</div>
+       						</ng-container>
+  						</div>	
+  						</div>				
+				</div>
+			</div>
+
+				<div class="search-block">
+					<div class="row px-4">
+						<div class="col-sm-12">
+							<label>Select the dates</label>
+							<span class="clear-inputs float-right" (click)="clearControl(['postedFrom','postedTo'])">clear</span>
+							<div class="input-group date-input">
+						      <input class="form-control" placeholder="Start date"
+						              ngbDatepicker #from="ngbDatepicker" formControlName="postedFrom">
+							      <div class="input-group-append">
+							        <button class="isp-btn isp-btn-default" (click)="from.toggle()">
+							          <i class="far fa-calendar-alt">			          	
+							          </i>
+			       					 </button>
+			     				 </div>
+		    				</div>
+						</div>
+						<div class="col-sm-12 mt-2">
+							<div class="input-group date-input">
+						      <input class="form-control" placeholder="End date"
+						              ngbDatepicker #to="ngbDatepicker" formControlName="postedTo">
+							      <div class="input-group-append">
+							        <button class="isp-btn isp-btn-default" (click)="to.toggle()">
+							          <i class="far fa-calendar-alt">			          	
+							          </i>
+			       					 </button>
+			     				 </div>
+			     				
+		    				</div>
+						</div>
+						<div class="col-sm-12 mt-2 d-flex">
+							 <input type="checkbox" #tillnow name="tillnow" id="tillnow" [hidden]="true" (change)="setUntilCurrentDate(tillnow.checked)">
+			     				<label for="tillnow" class="ml-2 isp-checkbox" [class.checked]="tillnow.checked"><i *ngIf="tillnow.checked" class="fa fa-check"></i></label>
+			       			<label class="ml-3">Until current date?</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="search-block">
+				<div class="row px-4">
+					<div class="col-sm-12">
+						<label for="tag">Tags</label>
+						<span class="clear-inputs float-right" (click)="clearControl('tags','array')">clear</span>
+						<input id="tag" class="form-control tag-input" type="text" placeholder="e.g. 'Cartoons'" #tagsInput="ngbTypeahead" [ngbTypeahead]="searchTags" (selectItem)="selectTag($event)"  (focus)="tagfocus$.next($event.target.value)"
+  						(click)="tagclick$.next($event.target.value)">
+  						<div class="d-flex">
+	  						<ng-container *ngIf="searchForm.get('tags').controls.length > 0">
+					       		<div class="isp-height100">
+					       			<div class="p-1 d-flex flex-wrap">
+					       			   	<span class="isp-chip warning-bg d-flex align-items-center" *ngFor="let tagControl of searchForm.get('tags').controls;let i=index;"><span>{{tagControl.value}}</span><i class="fa fa-times ml-1" (click)="removeFromArray('tags',i)"></i></span>
+					       			</div>
+					       		</div>
+       						</ng-container>
+  						</div>	
+  						</div>				
+				</div>
+			</div>
+
+			<div class="search-block">
+				<div class="row px-4">
+					<div class="col-sm-12">
+						<div class="d-flex">
+			       			<input type="checkbox" #reveal id="reveal" [hidden]="true" formControlName="revealAuthor">
+			       			<label for="reveal" class="ml-2 isp-checkbox" [class.checked]="reveal.checked"><i *ngIf="reveal.checked" class="fa fa-check"></i></label>
+			       			<label class="ml-3">Posts with author name?</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+				<div class="search-block">
+				<div class="row px-4">
+					<div class="col-sm-12">
+						<div class="d-block">
+			       			<label class="d-block">Order</label>
+			       			<div class="d-flex flex-row">
+				       			<input id="order-asc" #order_asc type="radio" formControlName="order" [hidden]="true" [value]="1">
+				       			<label for="order-asc" class="order-label mr-3" [class.active]="order_asc.checked"><span class="fas fa-sort-amount-up order-icon"></span></label>
+				       			<input id="order-desc" #order_desc type="radio" formControlName="order" [hidden]="true" [value]="-1">
+				       			<label for="order-desc" class="order-label mr-3" [class.active]="order_desc.checked"><span class="fas fa-sort-amount-down order-icon"></span></label>
+				 
+			       			</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="search-form-footer text-center">
+				<button class="isp-btn isp-btn-default text-uppercase" (click)="submitForm()"><img src="/assets/icons/search.svg" class="isp-btn-icon">Search</button>
+			</div>
+
+			</form>
+	</div>
+
+	
+</div>

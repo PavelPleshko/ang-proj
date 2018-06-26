@@ -1,0 +1,9 @@
+<app-main-nav [currentUser]="currentUser"></app-main-nav>
+
+
+<div class="main-content container" [class.main-content-admin-mode]="currentUser && currentUser.role == 'admin'">
+	
+			<router-outlet></router-outlet>
+		
+	</div>
+<ng-snotify></ng-snotify>

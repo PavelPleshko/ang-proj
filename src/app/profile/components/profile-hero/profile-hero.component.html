@@ -1,0 +1,40 @@
+<div class="page-block profile-hero">
+	<ng-container *ngIf="user">
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<div class="profile-hero-avatar-wrapper">
+					<img src="/assets/icons/male_profile.svg" class="profile-hero-avatar">
+				</div>
+				
+			</div>
+			<div class="col-sm-10 profile-hero-info row">
+				<ul class="profile-hero-description d-flex flex-column col-sm-4">
+					<li class="profile-hero-description-username">{{user.username}}<span class="profile-edit ml-5"><i class="fa fa-edit"></i></span></li>
+					<li class="profile-hero-description-role"><strong>Role:</strong> {{user.role}}</li>
+					<li class="profile-hero-description-gender"><strong>Gender:</strong> {{user.profile.gender}}</li>
+					<li class="profile-hero-description-age"><strong>Age:</strong> {{user.profile.age}}</li>
+					<li class="profile-hero-description-nationality"><strong>Nationality:</strong> Russia</li>
+
+				</ul>
+				<div class="profile-hero-bio col-sm-7">
+					<div>
+						<span class="text-left d-block header mb-1">
+							About me
+							<span class="profile-edit ml-3"><i class="fa fa-edit"></i></span>
+							<span class="separator"></span>
+
+						</span>
+						<p>
+							I am a positive and cheerful person. I love to go out, to be in the city where all the wonderful things happen. I enjoy socializing and being the center of attention.
+						</p>
+						<div class="profile-hero-location mt-3">
+							<img src="/assets/icons/location.svg"> Serbia, Belgrade
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-container>
+</div>

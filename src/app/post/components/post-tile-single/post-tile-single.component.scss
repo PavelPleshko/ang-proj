@@ -1,0 +1,151 @@
+@import "_colors.scss";
+
+
+.post-tile-single{
+    display: block;
+    border-radius: 5px;
+    font-size:1.3rem;
+
+    &:hover{
+    	cursor:pointer;
+    	//background:lighten($body-main-bg,3%);
+    }
+
+    &-header,&-body,&-footer,&-tags{
+    	//border-bottom:1px solid lighten($menu-bg,5%);
+    	width:100%;
+    	padding:0.5rem 1rem;
+    }
+
+    &-header{
+    	display:flex;
+    	justify-content:space-between;
+    }
+
+    &-footer{
+    	display:flex;
+    	justify-content:space-around;
+    		border-top:1px solid rgba($input-bg,.7);
+    		span:not([class*="counter"]){
+    			text-align:center;
+    			color:$disabled;
+    				i{
+    			opacity:.8;
+    			font-size:1.6rem;
+    			
+    			&:hover:not(.isp-disabled-text){
+    				opacity:1;
+    			}
+    		}
+    		}
+    	
+
+    }
+    &-body{
+    	padding:1.5rem 1rem;
+
+    	.showmore{
+    		font-size: 1rem;
+		    font-style: italic;
+		    font-weight: 500;
+		    color:rgba($menu-bg,.8);
+
+		    &:hover{
+		    	color:rgba($menu-bg,1);
+		    }
+
+    	}
+    }
+
+    &-tags{
+    	display:flex;
+
+    }
+
+    .post{
+
+    	&-category{
+    		text-transform:capitalize;
+    		border-radius:1rem;
+    		padding:.2rem 1rem;
+    		background:$warning;
+    		font-weight:500;
+    		transition:.2s all;
+    		color:$white;
+
+    		&:hover{
+    			background:darken($warning,4%);
+    			cursor:pointer;
+    		}
+    	}
+
+    	&-date{
+    		font-style:italic;
+    		font-size:1.2rem;
+    		opacity:.8;
+    	}
+
+    	&-id,&-author{
+    		display:flex;
+    		align-items:center;
+    	}
+
+    	&-like,&-dislike,&-comments,&-add-bookmarks{
+    		display: flex;
+		    align-items: center;
+		    position:relative;
+
+    	}
+
+    	&-action-alert{
+    		    width: 10rem;
+			    min-height: 3rem;
+			    padding: .5rem;
+			    font-size: 1rem;
+			   	position:absolute;
+			   	left:0;
+			   	top:35px;
+			    border-radius: 4px;
+			    z-index:99999;
+    			
+
+    			&-title{
+    				font-weight:600;
+    			}
+
+    			&:after{
+    				content:'';
+    				display:block;
+    				position:absolute;			
+    				top: -10px;
+				    width: 0;
+				    height: 0;
+				    border-left: 10px solid transparent;
+				    border-right: 10px solid transparent;
+				    
+    			}
+
+    			&-error{
+    				background:rgba(lighten($danger,10%),1);
+    				color:$white;
+
+    				&:after{
+    					border-bottom: 10px solid rgba(lighten($danger,10%),1);
+    				}
+    			}
+
+    			&-success{
+    				background:rgba(lighten($success,10%),1);
+    				color:$white;
+    				&:after{
+    					border-bottom: 10px solid rgba(lighten($success,10%),1);
+    				}
+    			}
+    	}
+
+    
+    }
+}
+
+
+		   

@@ -1,0 +1,35 @@
+<div class="admin-panel">
+	<div class="container d-flex justify-content-between">
+	<div class="admin-panel-logo">
+		<strong>Admin MODE</strong>
+	</div>
+
+	
+			<ul class="admin-panel-menu">
+				<li ngbDropdown>
+					<a class="" ngbDropdownToggle>Quick create</a>
+					<div ngbDropdownMenu>
+				        <button class="dropdown-item" *ngFor="let option of createOptions" (click)="openModal(option.title)">{{option.title | capitalize}}</button>
+				        
+    				  </div>
+				</li>
+				<li>
+					<a class="">Enter panel<i class="fa fa-arrow-circle-right ml-2"></i></a>
+				</li>
+			</ul>
+
+			<ul class="admin-panel-state">
+				<li class="notifications">
+					<i class="far fa-bell"></i>
+					<span class="isp-counter default-bg">0</span>
+				</li>
+				<li class="">
+					<i class="far fa-envelope"></i>
+					<span class="isp-counter default-bg">0</span>
+				</li>
+			</ul>
+
+		
+
+</div>
+</div>

@@ -1,0 +1,39 @@
+
+<div class="main-nav-wrapper">
+	<ng-container *ngIf="currentUser && currentUser.role == 'admin'">
+	<app-admin-panel></app-admin-panel>
+	</ng-container>
+	<div class="main-nav">
+		<div class="container d-flex justify-content-between align-content-center">
+			<a [routerLink]="['/posts']" class="logo">
+				<div><strong>Confess</strong>
+					<span>ions</span></div>			
+			</a>
+		
+
+
+			<div class="row align-items-center">
+				<ul class="main-nav_menu">
+					<li><a (click)="openCreatePostModal()"><i class="fa fa-edit"></i></a></li>
+					<li><a><i class="fa fa-bell"></i>
+						<span class="isp-counter bg-danger">0</span></a></li>
+					
+					<li><a [routerLink]="['profile']"><i class="fa fa-user"></i></a></li>
+				</ul>
+				<ng-container *ngIf="currentUser; else nouser">
+				<span class="auth-section-user row align-items-center">
+					<span class="auth-section-user-username">Hi, <strong>{{currentUser.username}}</strong></span>
+					<span class="logout-btn" (click)="logout()"><i class="fa fa-power-off"></i></span>
+				</span>
+			</ng-container>
+			<ng-template  #nouser>
+				<span class="auth-section-nouser">
+					<a [routerLink]="['auth/signup']" class="isp-btn isp-btn-success">Sign up</a>
+					<a [routerLink]="['auth/signin']" class="isp-btn isp-btn-primary">Sign in</a>
+				</span>
+			</ng-template>
+
+			</div>
+		</div>
+	</div>
+</div>

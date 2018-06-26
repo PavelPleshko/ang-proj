@@ -1,0 +1,51 @@
+<div class="posts">
+	<div class="posts-wrapper row">
+		<div class="col-sm-8">
+			<div class="posts-list">
+				<div class="page-block p-3 d-flex justify-content-between align-items-center">
+					<div class="btn-group btn-group-toggle" name="radioBasic" (change)="getPosts({type:$event.target.value})">
+  
+					  <label *ngFor="let postState of postStates" class="btn isp-btn" [ngClass]="{'isp-btn-default':postState.value != state,'isp-btn-default-active':postState.value == state}">
+					    <input type="radio" [value]="postState.value" name="postsState" [hidden]="true">
+					         <i class="{{postState.icon}} mr-2"></i>{{postState.title | capitalize}}
+					  </label>
+					</div>
+					<div>
+						<div class="posts-results d-flex flex-column align-items-end">
+							<span>Total records: <strong>{{totalResults}}</strong></span><span>Shown: <strong>{{posts.length}}</strong></span>
+						</div>
+					</div>
+					</div>
+
+					<app-post-filters [filters]="currentFilterTransformed" (filterRemoved)="filterRemoved($event)"></app-post-filters>
+				
+				<div class="my-2 d-flex justify-content-between align-items-center px-1">
+					<span class="posts-title"><strong>{{state | capitalize}}</strong> posts</span>
+					<span class="posts-pages">Page <strong>{{currentPage}}</strong> of <strong>{{totalPages}}</strong></span>
+				</div>
+				<ng-container *ngIf="filteredPosts && filteredPosts.length; else noposts;">
+					<app-post-tile-single *ngFor="let post of filteredPosts" [post]="post" [currentUser]="currentUser | async" [alertMessage]="alertMessage" (postAction)="doPostAction($event)">
+						
+					</app-post-tile-single>
+
+				</ng-container>
+				<ng-template #noposts>
+					<div class="text-center">
+						No posts yet.
+					</div>
+				</ng-template>
+				<div class="d-flex align-content-center justify-content-center">
+					<ngb-pagination [collectionSize]="totalResults" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" [(page)]="currentPage" [pageSize]="pageSize" (pageChange)="changeCurrentPage($event)"></ngb-pagination>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-sm-4">
+			
+					<app-post-search [categories]="categories" [tags]="tags" (searchPosts)="filterPostsBy($event)"></app-post-search>
+					<app-category-list [categories]="categories" (getPostsByCategoryId)="filterPostsBy($event)"></app-category-list>
+		
+	
+		</div>
+	</div>
+</div>

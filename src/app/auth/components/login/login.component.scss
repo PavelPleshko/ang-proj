@@ -1,0 +1,65 @@
+@import "_colors.scss";
+
+
+.login-frame{
+
+	
+
+	.login-form{
+		width: 50%;
+	    margin: 0 auto;
+	    overflow:hidden;
+	    text-align:center;
+	    background-color:$popup-bg;
+
+	    &-header{
+	    	padding:1rem;
+	    	background-color:$menu-bg;
+	    	color:$white;
+	    }
+
+	    &-body{
+	    	 padding: 1rem 6rem 4rem 6rem;
+	    }
+
+
+	    &-error-text{
+	    	padding:.3rem;
+	    	font-size:1.1rem;
+	    	color:$error-danger;
+	    	width:100%;
+	    }
+
+	   .showpassword{
+	   		position:absolute;
+	   		font-size:1.5rem;
+	   		z-index:10;
+	   		right:2rem;
+	   		top:0;
+	   		width:2rem;
+	   		height:100%;
+	   		i.fa{
+	   			display: block;
+			    top: 50%;
+			    position: relative;
+			    transform: translateY(-50%);
+			    color:$menu-bg;
+			    opacity:.5;
+	   		}
+
+	   	&:hover{
+	   		cursor:pointer;
+	   	}
+	   }
+
+	   .noaccount a{
+	   	color:$menu-bg;
+	   	font-size:1.2rem;
+
+	   	&:hover{
+	   		color:$menu-icons;
+	   		text-decoration:underline;
+	   	}
+	   }
+	}
+}

@@ -1,0 +1,66 @@
+
+  <div class="create-post-header">
+    <h4 class="create-post-header-title text-center">Share your story</h4>
+    <button type="button" class="create-post-header-close" (click)="closeModal()">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="create-post-body">
+    <form [formGroup]="postForm">
+      <div class="create-post-form">
+       <div class="">
+       	<label for="postText">Type your story here *</label>
+       	<textarea class="form-control lg" #postText maxlength="1500" minlength="15" id="postText" formControlName="text">
+       		
+       	</textarea>
+       	<div class="hint-area d-flex justify-content-between px-2">
+       		<span class="text-muted font-italic">Story should be in the range of 15-1500 symbols</span>
+       		<span><span class="font-weight-bold" [ngClass]="{'text-success':postText.value.length<1500 && postText.value.length> 15,'text-danger':postText.value.length>=1500,'text-warning':postText.value.length <= 15}">{{postText.value.length || 0}}</span> / 1500</span>
+       	</div>
+
+       </div>
+       <div class="row">
+       		<div class="col-sm-6">
+       			<label for="category">Category *</label>
+       			<select id="category" class="form-control" formControlName="category">
+       				<option value="{{category._id}}" *ngFor="let category of categories">{{category.title}}</option>
+       			</select>
+       		</div>
+       		<div class="col-sm-6">
+       		<div class="align-items-end align-content-center d-flex isp-height100">
+       			<span class="mx-auto d-flex">
+	       			<label>Reveal your username?</label>
+	       			<input type="checkbox" #revealAuthorModal id="revealAuthorModal" [hidden]="true" formControlName="revealAuthor">
+			       			<label for="revealAuthorModal" class="ml-2 isp-checkbox" [class.checked]="revealAuthorModal.checked"><i *ngIf="revealAuthorModal.checked" class="fa fa-check"></i></label>
+       			</span>
+       		</div>
+       	</div>
+       </div>
+
+          <div class="row mt-3">
+          	<div class="col-sm-5" formArrayName="tags">
+
+          		<label>Start typing and click on tag to add</label>
+          		<input type="text" #tagsInput="ngbTypeahead" name="tagsTypeahead" class="form-control" [ngbTypeahead]="searchTags" (selectItem)="selectTag($event)"  (focus)="focus$.next($event.target.value)"
+  (click)="click$.next($event.target.value)">
+          	</div>
+       		<div class="col">
+       			<ng-container *ngIf="postForm.get('tags').controls.length > 0; else notags">
+		       		<div class="isp-height100">
+		       			<label class="d-block text-center">Click on tag to remove it</label>
+		       			<div class="p-1 d-flex">
+		       			   	<span class="isp-post-tag" *ngFor="let tagControl of postForm.get('tags').controls;let i=index;" (click)="removeFromArray('tags',i)">{{tagControl.value}}</span>
+		       			</div>
+		       		</div>
+       		</ng-container>
+       		<ng-template #notags><div class="text-muted font-italic isp-middle">No tags selected</div></ng-template>
+       	</div>
+       </div>
+      </div>
+    </form>
+  </div>
+  <div class="create-post-footer isp-group">
+    <button type="button" class="isp-btn isp-btn-default text-uppercase float-right" (click)="submitForm()">Create post<i class="ml-1 fab fa-telegram-plane"></i></button>
+  </div>
+
+

@@ -1,0 +1,37 @@
+@import '_colors.scss';
+
+.posts-categories{
+		
+
+		&-list{
+			list-style:none;
+
+
+			li:not(.showmore){
+				    font-size: 1.3rem;
+				    padding: .7rem 1rem;
+				    border-top:1px solid rgba($menu-bg,.05);
+				    transition:.2s ease-in-out;
+
+				    .badge{
+				    	color:$white;
+				    }
+
+				    &:hover{
+				    	cursor:pointer;
+				    	background-color:$body-main-bg;
+				    }
+			}
+			.showmore{
+				a{
+					color:$menu-bg;
+					font-size: 1.3rem;
+				    padding: .7rem 1rem;
+					&:hover{
+						color:$menu-icons;
+					}
+				}
+			}
+		}
+		
+	}

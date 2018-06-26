@@ -1,0 +1,26 @@
+<ng-container *ngIf="data">
+
+  <div class="create-header default-bg">
+  	
+    <h4 class="create-header-title  text-center">Quick create {{data.type}}</h4>
+    <button type="button" class="create-header-close" (click)="closeModal()">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="create-body">
+  	<div class="create-form">
+    <form [formGroup]="createForm">
+   		<input type="text" formControlName="title" validateOnBlur [validateFormControl]="createForm.get('title')" [validateFunction]="checkUniqueness.bind(this,createForm.get('title').value,createForm.get('title'))" class="form-control" placeholder="Enter title here *">
+
+			<div class="create-error-text" *ngIf="createForm.get('title').touched && createForm.get('title').dirty && createForm.get('title').invalid || (!createForm.get('title').pristine && showAllErrorsIfExist)">
+				<div [hidden]="!createForm.get('title').errors?.required">Title is required</div>
+				<div [hidden]="!createForm.get('title').errors?.exists">Title already exists</div>
+			</div>
+    </form>
+  </div>
+</div>
+  <div class="create-footer isp-group">
+    <button type="button" class="isp-btn isp-btn-default default-bg text-uppercase float-right" (click)="submitForm()">Create {{data.type}}<i class="ml-1 fab fa-telegram-plane"></i></button>
+  </div>
+</ng-container>
+

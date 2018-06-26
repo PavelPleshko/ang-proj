@@ -1,0 +1,47 @@
+@import "_colors.scss";
+@import "mixins.scss";
+.dashboard{
+
+
+	&-cards{
+
+
+	}
+
+	
+
+	&-card-single{
+		min-height:12rem;
+		overflow:hidden;
+
+		&-body{
+			position:relative;
+			top:50%;
+			transform:translateY(-50%);
+		}
+		i{
+			transform: scale(5);
+		    transform-origin: 0 0;
+		    top: 2rem;
+		    left:.5rem;
+		    position: relative;
+		    opacity:.3;
+		    font-weight: 900;
+		}
+
+		.stats{
+			text-align:center;
+
+			&-number{
+				font-size:4rem;
+				color:$menu-bg;
+				font-weight:500;
+			}
+		}
+	}
+
+	&-card-single:not(:last-child){
+		border-right:1px solid #dedede;
+		
+	}
+}

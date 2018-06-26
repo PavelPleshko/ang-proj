@@ -1,0 +1,31 @@
+<div class="login-frame mr-auto">
+<form class="login-form page-block" [formGroup]="loginForm">
+	<h2 class="mb-3 text-uppercase login-form-header">Sign in</h2>
+	<div class="login-form-body">
+	<div class="login-form-error-text" *ngIf="errorText">{{errorText}}</div>
+	
+	<div class="mb-3 row">
+		<div class="col-sm-12">
+		<input type="text" autocomplete class="form-control" placeholder="Enter username *" formControlName="username" required>
+	</div>
+		<div class="login-form-error-text" *ngIf="loginForm.get('username').errors && !loginForm.get('username').pristine || (showAllErrorsIfExist && loginForm.get('username').errors)">
+			<div [hidden]="!loginForm.get('username').errors.required">Username is required</div>
+		</div>
+	</div>
+	<div class="mb-4 row">
+		<div class="col-sm-12">
+		<input [type]="showPassword ? 'text' : 'password'" autocomplete class="form-control" placeholder="Enter password *" formControlName="password" required>
+		
+		<span class="showpassword" (click)="showToggle('showPassword')"><i class="fa fa-{{showPassword ? 'eye' : 'eye-slash'}}"></i></span>
+	</div>
+		<div class="login-form-error-text" *ngIf="loginForm.get('password').errors && !loginForm.get('password').pristine || (showAllErrorsIfExist && loginForm.get('password').errors)">
+			<div [hidden]="!loginForm.get('password').errors.required">Password is required</div>
+		</div>
+	</div>
+	<div class="login-form-footer d-flex align-items-center">
+	<button class="isp-btn isp-btn-default py-3 px-5 text-uppercase text-center float-left" [class.isp-inprogress]="submitted" (click)="loginUser()">Submit<span class="ml-3" *ngIf="submitted && !errorText"><i class="fa fa-spinner isp-spinner"></i></span></button>
+	<div class="noaccount ml-4"><a [routerLink]="['/auth/signup']">Don't have an account?</a></div>
+</div>
+</div>
+</form>
+</div>

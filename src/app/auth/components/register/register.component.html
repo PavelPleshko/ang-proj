@@ -1,0 +1,77 @@
+<div class="register-frame mr-auto">
+<form class="register-form page-block" [formGroup]="signupForm" [hidden]="submitted && !signupForm.invalid">
+<h2 class="mb-3 text-uppercase register-form-header">Sign in</h2>
+<div class="register-form-body">
+	<div class="mb-3 row flex-nowrap">
+		<div class="col-sm-12">
+			<input type="text" autocomplete class="form-control" maxlength="25" placeholder="Enter username *" required formControlName="username" validateOnBlur [validateFormControl]="signupForm.get('username')" [validateFunction]="usernameExists.bind(this,signupForm.get('username').value,signupForm.get('username'))">
+		
+			<div class="register-form-error-text" *ngIf="signupForm.get('username').touched && signupForm.get('username').dirty && signupForm.get('username').invalid || (!signupForm.get('username').pristine && showAllErrorsIfExist)">
+				<div [hidden]="!signupForm.get('username').errors?.required">Username is required</div>
+				<div [hidden]="!signupForm.get('username').errors?.minlength && !signupForm.get('username').errors?.maxlength">Username should be 5-25 symbols</div>
+				<div [hidden]="!signupForm.get('username').errors?.exists">Username already exists</div>
+			</div>
+		</div>
+			<span class="isp-input-addon" *ngIf="!signupForm.get('username').invalid"><i class="fa fa-check"></i></span>
+		
+	</div>
+	<div class="mb-3 row flex-nowrap">
+		<div class="col-sm-6">
+			<label for="gender" class="mb-2 font-weight-bold">Gender</label>
+			<select id="gender" class="form-control" formControlName="gender">
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+			</select>
+		</div>
+		<div class="col-sm-6">
+			<label for="age" class="mb-2 font-weight-bold">Age</label>
+			<input type="number" min="14" max="90" name="age" class="form-control" id="age" formControlName="age" placeholder="Your age *" required>
+		</div>
+	</div>
+		<div class="mb-3 row flex-nowrap">
+		<div class="col-sm-12">
+				<div class="isp-relative">
+					<input type="email" autocomplete class="form-control" placeholder="Enter email *" required formControlName="email">
+					
+					
+				</div>
+				<div class="register-form-error-text" *ngIf="signupForm.get('email').errors && !signupForm.get('email').pristine || (!signupForm.get('email').pristine && showAllErrorsIfExist && signupForm.get('email').invalid)">
+				<div [hidden]="!signupForm.get('email').errors?.required">Email is required</div>
+				<div [hidden]="!signupForm.get('email').errors?.email">Enter a valid email</div>
+			    </div>
+	</div>
+		<span class="isp-input-addon" *ngIf="!signupForm.get('email').invalid"><i class="fa fa-check"></i></span>
+	</div>
+	<div class="mb-3 row flex-nowrap">
+		<div class="col-sm-12">
+				<div class="isp-relative">
+					<input [type]="showPassword ? 'text' : 'password'" autocomplete class="form-control" placeholder="Enter password *" required formControlName="password">
+					
+					<span class="showpassword" (click)="showToggle('showPassword')"><i class="fa fa-{{showPassword ? 'eye' : 'eye-slash'}}"></i></span>
+				</div>
+				<div class="register-form-error-text" *ngIf="signupForm.get('password').errors && !signupForm.get('password').pristine || (!signupForm.get('password').pristine && showAllErrorsIfExist && signupForm.get('password').invalid)">
+				<div [hidden]="!signupForm.get('password').errors?.required">Password is required</div>
+				<div [hidden]="!signupForm.get('password').errors?.minlength && !signupForm.get('password').errors?.maxlength">Password should be 6-35 symbols</div>
+			    </div>
+	</div>
+		<span class="isp-input-addon" *ngIf="!signupForm.get('password').invalid"><i class="fa fa-check"></i></span>
+	</div>
+	<div class="mb-4 row flex-nowrap">
+		<div class="col-sm-12">
+			<div class="isp-relative">
+				<input [type]="showConfirmPassword ? 'text' : 'password'" autocomplete class="form-control" placeholder="Confirm password *" required formControlName="confirmPassword" maxlength="25">
+				
+			<span class="showpassword" (click)="showToggle('showConfirmPassword')"><i class="fa fa-{{showConfirmPassword ? 'eye' : 'eye-slash'}}"></i></span>
+			</div>
+			<div class="register-form-error-text" *ngIf="signupForm.get('confirmPassword').errors?.matchPassword && !signupForm.get('confirmPassword').pristine">Passwords do not match
+			</div>
+		</div>
+		<span class="isp-input-addon" *ngIf="!signupForm.get('confirmPassword').invalid"><i class="fa fa-check"></i></span>
+	</div>
+	<button class="isp-btn isp-btn-default btn-block text-uppercase" [ngClass]="{'isp-inprogress':submitted,'isp-disabled':!signupForm.valid}" (click)="registerUser()">Submit</button>
+</div>
+
+</form>
+
+<div *ngIf="submitted && !signupForm.invalid" class="text-center"><span class="isp-alert-success">Form was submitted successfully.</span></div>
+</div>

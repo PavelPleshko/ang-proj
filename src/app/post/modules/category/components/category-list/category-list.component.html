@@ -1,0 +1,11 @@
+<div class="posts-categories page-block isp-overflow-hidden mt-2">
+				<h4 class="text-center py-3 default-bg" (click)="toggleCategoryVisible()">Categories<i class="fa fa-angle-right ml-2" [class.isp-rotate-angle90]="categoriesVisible" [class.isp-rotate]="!categoriesVisible"></i></h4>
+				<ul class="posts-categories-list isp-slideout-vertical" [class.show]="categoriesVisible">
+					<li *ngFor="let category of filteredCategories" class="d-flex justify-content-between align-items-center text-capitalize" (click)="getPostsByCategory(category)">
+						{{category.title}}<span class="badge badge-pill default-bg">{{category.posts.length}}</span>
+					</li>
+					<li *ngIf="categories && categories.length > 5" class="text-center showmore">
+						<a class="" (click)="showOrHideCategories()">Show {{categoriesCollapsed ? 'more' : 'less'}}<i class="fa fa-angle-down ml-2" [class.isp-rotate-angle180]="!categoriesCollapsed"></i></a>
+					</li>
+				</ul>
+			</div>
